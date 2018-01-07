@@ -1,0 +1,3 @@
+insert into user(id,username,name,age,balance) values (1,'account1','zhang3',20,100.00);
+insert into user(id,username,name,age,balance) values (2,'account2','li4',28,180.00);
+insert into user(id,username,name,age,balance) values (3,'account3','wang5',32,280.00);
