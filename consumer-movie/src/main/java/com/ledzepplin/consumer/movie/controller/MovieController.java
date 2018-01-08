@@ -37,28 +37,12 @@ public class MovieController {
     @Autowired
     private LoadBalancerClient loadBalancerClient;
 
-    private UserFeignClient userUserFeignClient;
+    private UserFeignClient userFeignClient;
 
-    private UserFeignClient adminUserFeignClient;
 
-    @Autowired
-    public MovieController(Decoder decoder, Encoder encoder, Client client, Contract contract){
-        this.userUserFeignClient = Feign.builder().client(client).encoder(encoder).decoder(decoder).contract(contract).
-                requestInterceptor(new BasicAuthRequestInterceptor("user","password1")).
-                target(UserFeignClient.class,"http://microservice-provider-user/");
-        this.adminUserFeignClient = Feign.builder().client(client).encoder(encoder).decoder(decoder).contract(contract).
-                requestInterceptor(new BasicAuthRequestInterceptor("admin","password2")).
-                target(UserFeignClient.class,"http://microservice-provider-user/");
-    }
-
-    @GetMapping("/user-user/{id}")
-    public User findByIdUser(@PathVariable Long id){
-        return userUserFeignClient.findById(id);
-    }
-
-    @GetMapping("/user-admin/{id}")
+    @GetMapping("/user/{id}")
     public User findByIdAdmin(@PathVariable Long id){
-        return adminUserFeignClient.findById(id);
+        return userFeignClient.findById(id);
     }
 //    @GetMapping("/user/{id}")
 //    public User findById(@PathVariable Long id){
