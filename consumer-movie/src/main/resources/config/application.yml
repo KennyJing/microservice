@@ -12,3 +12,7 @@ eureka:
   instance:
     prefer-ip-address: true
 feign.hystrix.enabled: false
+
+logging:
+  level:
+    com.ledzepplin.consumer.movie.feign.UserFeignClient: DEBUG
