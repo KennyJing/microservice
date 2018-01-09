@@ -12,6 +12,10 @@
         <module>provider-user</module>
         <module>consumer-movie</module>
         <module>discovery-eureka</module>
+        <module>microservice-hystrix-dashboard</module>
+        <module>microservice-hystrix-turbine</module>
+        <module>microservice-gateway-zuul</module>
+        <module>microservice-file-upload</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

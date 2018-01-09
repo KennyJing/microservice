@@ -2,6 +2,8 @@ package com.ledzepplin.consumer.movie.controller;
 
 import com.ledzepplin.consumer.movie.entity.User;
 import com.ledzepplin.consumer.movie.feign.UserFeignClient;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,11 +41,24 @@ public class MovieController {
     public User findByIdAdmin(@PathVariable Long id){
         return userFeignClient.findById(id);
     }
+//    @HystrixCommand(fallbackMethod = "findByIdFallBack",commandProperties = {
+//            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",value = "5000"),
+//            @HystrixProperty(name = "metrics.rollingStats.timeInMilliseconds",value = "10000")
+//    },threadPoolProperties = {
+//            @HystrixProperty(name = "coreSize",value = "1"),
+//            @HystrixProperty(name = "maxQueueSize",value = "10")
+//    })
 //    @GetMapping("/user/{id}")
 //    public User findById(@PathVariable Long id){
 //        return restTemplate.getForObject("http://microservice-provider-user/"+id,User.class);
 //    }
 
+    public User findByIdFallBack(Long id){
+        User user = new User();
+        user.setId(-1L);
+        user.setName("默认用户");
+        return user;
+    }
     @GetMapping("/log-instance")
     public void logUserInstance(){
         ServiceInstance serviceInstance = loadBalancerClient.choose("microservice-provider-user");

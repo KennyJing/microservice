@@ -1,17 +1,11 @@
 server:
-  port: 8010
-
+  port: 8040
 spring:
   application:
-    name: microservice-consumer-movie
-
+    name: microservice-gateway-zuul
 eureka:
   client:
     service-url:
       defaultZone: http://user:123456@peer1:8761/eureka/,http://user:123456@peer2:8762/eureka/
   instance:
     prefer-ip-address: true
-
-logging:
-  level:
-    com.ledzepplin.consumer.movie.feign.UserFeignClient: DEBUG
