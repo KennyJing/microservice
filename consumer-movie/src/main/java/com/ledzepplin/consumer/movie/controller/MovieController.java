@@ -53,10 +53,10 @@ public class MovieController {
 //        return restTemplate.getForObject("http://microservice-provider-user/"+id,User.class);
 //    }
 
-    public User findByIdFallBack(Long Id){
+    public User findByIdFallBack(Long id){
         User user = new User();
         user.setId(-1L);
-        user.setName("default user");
+        user.setName("默认用户");
         return user;
     }
     @GetMapping("/log-instance")
