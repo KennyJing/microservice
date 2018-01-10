@@ -9,3 +9,44 @@ eureka:
       defaultZone: http://user:123456@peer1:8761/eureka/,http://user:123456@peer2:8762/eureka/
   instance:
     prefer-ip-address: true
+
+
+
+#不破坏zuul的hystrix和ribbon特性的配置
+#zuul:
+#  routes:
+#    user-route:
+#      path: /user/**
+#      service-id: microservice-provider-user
+#ribbon:
+#  eureka:
+#    enable: false
+#microservice-provider-user:
+#  ribbon:
+#    listOfServers: localhost:8000,localhost:8001
+
+
+
+#同时指定path和URL，这样路由不会作为HystrixCommand执行，同时也不能使用Ribbon来负载多个URL
+#zuul:
+#  routes:
+#    user-route: provider
+#      url: http://localhost:8080
+#      path: /user/**
+
+
+#同时指定微服务的serviceId和对应路径
+#zuul:
+#  routes:
+#    user-route: provider   #user-route只是给路由一个名称，可以任意起名
+#      service-id: microservice-provider-user
+#      path: /user/**       #service-id对应的路径
+
+#zuul:
+#  ignored-services: '*'
+#  routes:
+#    microservice-provider-user: /user/**
+#zuul:
+#  routes:
+#    microservice-provider-user: /user/**
+#  ignored-services: microservice-consumer-movie
