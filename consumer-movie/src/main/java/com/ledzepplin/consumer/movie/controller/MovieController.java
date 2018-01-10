@@ -37,21 +37,21 @@ public class MovieController {
     private UserFeignClient userFeignClient;
 
 
-//    @GetMapping("/user/{id}")
-//    public User findByIdAdmin(@PathVariable Long id){
-//        return userFeignClient.findById(id);
-//    }
-    @HystrixCommand(fallbackMethod = "findByIdFallBack",commandProperties = {
-            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",value = "5000"),
-            @HystrixProperty(name = "metrics.rollingStats.timeInMilliseconds",value = "10000")
-    },threadPoolProperties = {
-            @HystrixProperty(name = "coreSize",value = "1"),
-            @HystrixProperty(name = "maxQueueSize",value = "10")
-    })
     @GetMapping("/user/{id}")
-    public User findById(@PathVariable Long id){
-        return restTemplate.getForObject("http://microservice-provider-user/"+id,User.class);
+    public User findByIdAdmin(@PathVariable Long id){
+        return userFeignClient.findById(id);
     }
+//    @HystrixCommand(fallbackMethod = "findByIdFallBack",commandProperties = {
+//            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",value = "5000"),
+//            @HystrixProperty(name = "metrics.rollingStats.timeInMilliseconds",value = "10000")
+//    },threadPoolProperties = {
+//            @HystrixProperty(name = "coreSize",value = "1"),
+//            @HystrixProperty(name = "maxQueueSize",value = "10")
+//    })
+//    @GetMapping("/user/{id}")
+//    public User findById(@PathVariable Long id){
+//        return restTemplate.getForObject("http://microservice-provider-user/"+id,User.class);
+//    }
 
     public User findByIdFallBack(Long Id){
         User user = new User();
@@ -64,5 +64,4 @@ public class MovieController {
         ServiceInstance serviceInstance = loadBalancerClient.choose("microservice-provider-user");
         logger.info("{}:{}:{}",serviceInstance.getServiceId(),serviceInstance.getHost(),serviceInstance.getPort());
     }
-
 }

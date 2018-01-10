@@ -1,20 +1,20 @@
-package com.ledzepplin.provider.user;
+package com.ledzepplin.hystrix.turbine;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.netflix.hystrix.EnableHystrix;
+import org.springframework.cloud.netflix.turbine.EnableTurbine;
 
 /**
- * @Author: Jingjiadong
- * @Description:
- * @Date: 7:28 PM 07/01/2018
+ * @description:
+ * @author: Jingjiadong
+ * @date: 3:10 PM 09/01/2018
  */
 @SpringBootApplication
+@EnableTurbine
 @EnableDiscoveryClient
-@EnableHystrix
-public class ProviderUserApplication {
+public class TurbineApplication {
     public static void main(String[] args){
-        SpringApplication.run(ProviderUserApplication.class,args);
+        SpringApplication.run(TurbineApplication.class,args);
     }
 }

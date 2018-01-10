@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @description:
+ * @description:feign请求log配置类
  * @author: Jingjiadong
  * @date: 8:48 PM 08/01/2018
  */
