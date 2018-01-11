@@ -16,6 +16,7 @@
         <module>microservice-hystrix-turbine</module>
         <module>microservice-gateway-zuul</module>
         <module>microservice-file-upload</module>
+        <module>microservice-sidecar</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
