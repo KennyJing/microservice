@@ -3,7 +3,16 @@ spring:
     name: microservice-foo
   cloud:
     config:
-      uri: http://localhost:8080/
-      profile: test
+      profile: dev
       label: master
-
+      discovery:
+        service-id: microservice-config-server-eureka
+        enabled: true
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+    service-url:
+      defaultZone: http://user:123456@peer1:8761/eureka/
+  instance:
+    prefer-ip-address: true
