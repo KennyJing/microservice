@@ -38,4 +38,8 @@ public class UserController {
         }
         return userRepository.findOne(id);
     }
+
+    public static void main(String[] args) {
+        System.out.println("hello");
+    }
 }
