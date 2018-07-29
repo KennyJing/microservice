@@ -31,7 +31,7 @@ public class UserController {
             UserDetails user = (UserDetails) principal;
             Collection<? extends GrantedAuthority> collection = user.getAuthorities();
             collection.stream().forEach((x)->{
-                logger.info("当前用户是{},角色是{}",user.getUsername(),x.getAuthority());
+                logger.info("当前用户是{},角色-----------是{}",user.getUsername(),x.getAuthority());
             });
         }else {
             //do other things
